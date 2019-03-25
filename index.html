@@ -9,23 +9,39 @@
 
 	<body>
 		<div id="app">
-			<input type="text"  v-model="inputValue"/>
+			<input type="text" v-model="inputValue" />
 			<button v-on:click="handleBtn">提交</button>
 			<ul>
-				<li v-for="item in list">{{item}}</li>
+				<!-- <li v-for="item in list">{{item}}</li> -->
+				<todo-item v-bind:content="item" v-for="item in list"></todo-item>
 			</ul>
-		
+
 		</div>
 
 		<script>
+			// 全局组件
+// 			Vue.component("TodoItem", {
+// 				props:["content"],
+// 				template:"<li>{{content}}</li>"
+// 			})
+
+			//局部组件 记得在Vue中注册
+			var TodoItem  = {
+				props:["content"],
+				template:"<li>{{content}}</li>"
+			}
+			
 			var app = new Vue({
 				el: "#app",
-				data: { 
-					list: [],
-					inputValue:" "
+				components:{
+					TodoItem:TodoItem
 				},
-				methods:{
-					handleBtn:function(){
+				data: {
+					list: [],
+					inputValue: " "
+				},
+				methods: {
+					handleBtn: function() {
 						this.list.push(this.inputValue)
 						this.inputValue = ""
 					}

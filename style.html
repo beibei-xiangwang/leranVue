@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>vue的样式绑定</title>
+		<script src="vue.js"></script>
+		<style>
+			.activated{
+				color: red;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="app">
+			<!-- class的样式绑定 对象/数组 -->
+			<!-- <div @click="handleDivClick" :class="{activated:isActivated}">Hello world</div> -->
+			<!-- <div @click="handleDivClick" :class="[activated]">Hello world</div> -->
+			<!-- <div @click="handleDivClick" :style="sytleObj">Hello world</div> -->
+			<div @click="handleDivClick" :style="[sytleObj,{fontSize:'20px'}]">Hello world</div>
+		</div>
+		
+		<script>
+			var vm = new Vue({
+				el:"#app",
+				data:{
+					isActivated:false,
+					activated:"",
+					sytleObj:{
+						color:"black"
+					}
+				},
+				methods:{
+// 					handleDivClick:function(){
+// 						this.isActivated = !this.isActivated
+// 					}
+// 					handleDivClick:function(){
+// 						this.activated = this.activated==="activated"?"":"activated"
+// 					}
+					handleDivClick:function(){
+						this.sytleObj.color = this.sytleObj.color==="black"?"red":"black"
+					}
+				}
+			})
+		</script>
+	</body>
+</html>

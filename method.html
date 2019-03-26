@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<meta charset="utf-8">
-		<title>计算属性，方法，监听器</title>
+		<title>计算属性，方法，监听器，计算属性的get，set方法</title>
 		<script src="vue.js"></script>
 	</head>
 	<body>
@@ -16,19 +16,33 @@
 				data: {
 					firstName: "姓",
 					lastName: "名",
-					fullName: "姓名",
+					// fullName: "姓名",
 					age: 25,
 				},
-				watch: {
-					firstName: function() {
-						console.log("---watch---");
-						this.fullName = this.firstName + "" + this.lastName;
-					},
-					lastName: function() {
-						console.log("---watch---");
-						this.fullName = this.firstName + "" + this.lastName;
+				
+				computed: {
+					fullName: {
+						get:function(){
+							return this.firstName + this.lastName;
+						},
+						set:function(value){
+							var arr=value.split(" ");
+							this.firstName = arr[0];
+							this.lastName = arr[1];
+						}
 					}
-				},
+				}
+				
+// 				watch: {
+// 					firstName: function() {
+// 						console.log("---watch---");
+// 						this.fullName = this.firstName + "" + this.lastName;
+// 					},
+// 					lastName: function() {
+// 						console.log("---watch---");
+// 						this.fullName = this.firstName + "" + this.lastName;
+// 					}
+// 				},
 				// 方法
 // 				methods: {
 // 					fullName: function() {

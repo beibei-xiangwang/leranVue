@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>父子组件传值</title>
+		<script src="vue.js"></script>
+	</head>
+
+	<body>
+		<div id="app">
+			<counter :count=2 @change="handleChange"></counter>
+			<counter :count=3 @change="handleChange"></counter>
+			<div>{{total}}</div>
+		</div>
+		<!-- 父向子传  通过属性 -->
+		<!-- 子向父传  通过触发事件的形式  -->
+		<!-- 注意单向数据流 父向子传递的数据 子不可直接修改 需拷贝副本修改副本 -->
+		<script>
+			var counter = {
+				props: ["count"],
+				data: function() {
+					return {
+						num: this.count
+					}
+				},
+				template: "<div @click='handleClick'>{{num}}</div>",
+				methods: {
+					handleClick: function() {
+						this.num = this.num + 2;
+						this.$emit("change", 2)
+					}
+				}
+			}
+
+			var vm = new Vue({
+				el: "#app",
+				components: {
+					counter: counter
+				},
+				data: {
+					total: 5
+				},
+				methods: {
+					handleChange: function(step) {
+						this.total += step
+					}
+				}
+			})
+		</script>
+
+	</body>
+</html>

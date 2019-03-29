@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>动态组件与v-once指令</title>
+		<script src="vue.js"></script>
+	</head>
+	<body>
+		<div id="app">
+			<!-- <item-one v-if="type"></item-one>
+			<item-two v-else></item-two> -->
+			<component :is="type?'item-one':'item-two'"></component>
+			<button @click="handleClick"> 按钮</button>
+		</div>
+
+		<script>
+			// v-once 放入缓存,有效提高效率
+			Vue.component("item-one",{
+				template:"<div v-once>content111</div>"
+			})
+			Vue.component("item-two",{
+				template:"<div v-once>content222</div>"
+			})
+			var vm = new Vue({
+				el:"#app",
+				data:{
+					type:true
+				},
+				methods:{
+					handleClick:function(){
+						this.type= !this.type
+					}
+				}
+				
+			})
+		</script>
+		
+	</body>
+</html>

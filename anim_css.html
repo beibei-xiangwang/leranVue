@@ -4,7 +4,28 @@
 		<meta charset="utf-8">
 		<title>Vue中的css动画</title>
 		<script src="vue.js"></script>
+		<link rel="stylesheet" type="text/css" href="animate.css" />
 		<style>
+			/* @keyframes bounce-in{
+				0%{
+					transform: scale(0);
+				}
+				50%{
+					transform: scale(1.5);
+				}
+				100%{
+					transform: scale(1);
+				}
+			} */
+			/* .active{
+				transform-origin: left center;
+				animation: bounce-in 1s;
+			}
+			.leave{
+				transform-origin: left center;
+				animation: bounce-in 1s  ;
+			} */
+			
 			/* .fade-enter,
 			.fade-leave-to{
 				opacity: 0;
@@ -13,21 +34,23 @@
 			.fade-leave-active{
 				transition: opacity 3s;
 			} */
-			.v-enter,
+		/* 	.v-enter,
 			.v-leave-to{
 				opacity: 0;
 			}
 			.v-enter-active,
 			.v-leave-active{
 				transition: opacity 3s;
-			}
+			} */
+			
+			
 		</style>
 	</head>
 	<body>
 		<div id="app">
-		<!-- 	<transition name="fade"> -->
-			<transition>
-				<div v-if="show">hello world</div>
+			<transition enter-active-class="animated jello" leave-active-class="animated hinge">
+			<!-- <transition>  -->
+				<div v-show="show">hello world</div>
 			</transition>
 			<button @click="handleClick">切换</button>
 		</div>
